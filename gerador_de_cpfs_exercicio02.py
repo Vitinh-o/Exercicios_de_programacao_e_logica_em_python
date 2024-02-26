@@ -72,7 +72,8 @@ while True:
 
     print("Bem vindo ao gerador de CPFS !")
 
-    opcao_digitada = input('Digite "gerar" para gerar um cpf ou "sair" para sair da aplicação: ').lower()
+    opcao_digitada = input('Digite "gerar" para gerar para gerar um cpf "validar" para validar  \
+                            um cpf ou "sair" para sair da aplicação: ').lower()
 
     if opcao_digitada == "sair":
         print("Adeus!")
@@ -93,6 +94,41 @@ while True:
         cpf_final = (primeiros_10_numeros_do_cpf * 10) + decimo_primeiro_digito
 
         print(cpf_final)
+
+    elif opcao_digitada == "validar":
+
+        decimo_e_decimo_primeiro_digito = []
+        primeiros_9_numeros_do_cpf = ""
+        cpf_para_validar = input("Digite o cpf (apenas o numero): ")
+
+        if ".-" in cpf_para_validar or len(cpf_para_validar) > 11:
+            print("você não digitou o cpf no formato correto!")
+
+        for indice, digito in enumerate(cpf_para_validar):
+
+            if indice > 9:
+
+                decimo_e_decimo_primeiro_digito.append(digito)
+
+            else:
+
+                primeiros_9_numeros_do_cpf += digito
+
+        decimo_digito_verdadeiro = validar_decimo_digito_do_cpf(int(primeiros_9_numeros_do_cpf))
+
+        primeiros_10_numeros_do_cpf = primeiros_9_numeros_do_cpf + decimo_e_decimo_primeiro_digito[1]
+
+        decimo_primeiro_digito_verdadeiro = validar_decimo_primeiro_digito_do_cpf(primeiros_10_numeros_do_cpf)
+    
+        if decimo_digito_verdadeiro == decimo_e_decimo_primeiro_digito[0] and decimo_primeiro_digito_verdadeiro == decimo_e_decimo_primeiro_digito[1]:
+
+            print("CPF VALIDADO")
+
+        else:
+
+            print("CPF INVALIDO")
+
+
 
     else:
         print("Você não digitou uma opção válida!")
