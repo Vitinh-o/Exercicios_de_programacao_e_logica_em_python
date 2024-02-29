@@ -25,8 +25,8 @@ contrário disso:
     resultado é o valor da conta
 
 O primeiro dígito do CPF é 7
-
 Para o segundo digito refaça a mesma coisa porém agora comece a multiplicação
+
 """
 
 import os
