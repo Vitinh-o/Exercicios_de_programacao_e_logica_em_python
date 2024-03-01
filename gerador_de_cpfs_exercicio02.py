@@ -32,33 +32,12 @@ Para o segundo digito refaça a mesma coisa porém agora comece a multiplicaçã
 import os
 import random 
 
-def validar_decimo_digito_do_cpf(primeiros_9_numeros_do_cpf):
+def validar_ultimos_digitos_do_cpf(primeiros_digitos_do_cpf, contador):
 
-    primeiros_9_numeros_do_cpf_em_string = str(primeiros_9_numeros_do_cpf)
-
-    contador = 10
+    primeiros_9_numeros_do_cpf_em_string = str(primeiros_digitos_do_cpf)
     soma_dos_digitos = 0
 
     for numeros in primeiros_9_numeros_do_cpf_em_string:
-
-        soma_dos_digitos += int(numeros) * contador
-        contador -= 1
-
-    multiplicacao_final_do_cpf = soma_dos_digitos * 10 
-
-    decimo_digito_do_cpf = multiplicacao_final_do_cpf % 11
-
-    return decimo_digito_do_cpf if decimo_digito_do_cpf <= 9 else 0
-
-
-def validar_decimo_primeiro_digito_do_cpf(primeiros_10_numeros_do_cpf):
-    
-    primeiros_10_numeros_do_cpf_em_string = str(primeiros_10_numeros_do_cpf)
-
-    contador = 11
-    soma_dos_digitos = 0
-
-    for numeros in primeiros_10_numeros_do_cpf_em_string:
 
         soma_dos_digitos += int(numeros) * contador
         contador -= 1
@@ -87,11 +66,11 @@ while True:
 
         primeiros_9_numeros_do_cpf = int(primeiros_9_numeros_do_cpf)
 
-        decimo_digito = validar_decimo_digito_do_cpf(primeiros_9_numeros_do_cpf)
+        decimo_digito = validar_ultimos_digitos_do_cpf(primeiros_9_numeros_do_cpf, 10)
 
         primeiros_10_numeros_do_cpf = (primeiros_9_numeros_do_cpf * 10) + decimo_digito
 
-        decimo_primeiro_digito = validar_decimo_primeiro_digito_do_cpf(primeiros_10_numeros_do_cpf)
+        decimo_primeiro_digito = validar_ultimos_digitos_do_cpf(primeiros_10_numeros_do_cpf, 11)
 
         cpf_final = (primeiros_10_numeros_do_cpf * 10) + decimo_primeiro_digito
 
@@ -102,7 +81,6 @@ while True:
 
         os.system("clear")
 
-        decimo_e_decimo_primeiro_digito = []
         primeiros_9_numeros_do_cpf = ""
         cpf_para_validar = input("Digite o cpf (apenas o numero): ")
 
@@ -110,24 +88,20 @@ while True:
             
             print("você não digitou o cpf no formato correto!")
             continue
+        
+        decimo_digito = cpf_para_validar[9:10]
 
-        for indice, digito in enumerate(cpf_para_validar):
+        primeiros_9_numeros_do_cpf = cpf_para_validar[:9] 
 
-            if indice > 8:
-
-                decimo_e_decimo_primeiro_digito.append(digito)
-
-            else:
-
-                primeiros_9_numeros_do_cpf += digito
+        print(decimo_digito)
 
         # 10 Digito que foi validado pelo sistema 
-        decimo_digito_verdadeiro = validar_decimo_digito_do_cpf(int(primeiros_9_numeros_do_cpf))
+        decimo_digito_verdadeiro = validar_ultimos_digitos_do_cpf(int(primeiros_9_numeros_do_cpf), 10)
 
-        primeiros_10_numeros_do_cpf = primeiros_9_numeros_do_cpf + decimo_e_decimo_primeiro_digito[0]
+        primeiros_10_numeros_do_cpf = primeiros_9_numeros_do_cpf + decimo_digito
 
         # 11 Digito que foi validado pelo sistema
-        decimo_primeiro_digito_verdadeiro = validar_decimo_primeiro_digito_do_cpf(primeiros_10_numeros_do_cpf)
+        decimo_primeiro_digito_verdadeiro = validar_ultimos_digitos_do_cpf(primeiros_10_numeros_do_cpf, 11)
 
         cpf_validado = primeiros_9_numeros_do_cpf + str(decimo_digito_verdadeiro) + str(decimo_primeiro_digito_verdadeiro)
 
@@ -144,3 +118,6 @@ while True:
         os.system("clear")
         print("Você não digitou uma opção válida!")
         continue
+
+
+    
