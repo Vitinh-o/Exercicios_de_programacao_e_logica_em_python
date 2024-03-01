@@ -74,12 +74,12 @@ while True:
 
         cpf_final = (primeiros_10_numeros_do_cpf * 10) + decimo_primeiro_digito
 
-        os.system("clear")
+        os.system("cls")
         print(f"CPF gerado: {cpf_final}")
 
     elif opcao_digitada == "validar":
 
-        os.system("clear")
+        os.system("cls")
 
         primeiros_9_numeros_do_cpf = ""
         cpf_para_validar = input("Digite o cpf (apenas o numero): ")
@@ -92,8 +92,6 @@ while True:
         decimo_digito = cpf_para_validar[9:10]
 
         primeiros_9_numeros_do_cpf = cpf_para_validar[:9] 
-
-        print(decimo_digito)
 
         # 10 Digito que foi validado pelo sistema 
         decimo_digito_verdadeiro = validar_ultimos_digitos_do_cpf(int(primeiros_9_numeros_do_cpf), 10)
@@ -115,7 +113,7 @@ while True:
 
     else:
         
-        os.system("clear")
+        os.system("cls")
         print("Você não digitou uma opção válida!")
         continue
 
