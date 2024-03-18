@@ -71,11 +71,14 @@ def list_print():
         pprint(tasks)
 
 
+print("Bem-vindo ao criador de tarefas")
+
 load_list_file()
+
+list_print()
 
 while True:
 
-    print("Bem-vindo ao criador de tarefas")
     print("Digite uma das opções: abaixo.")
     option = input("inserir, apagar, desfazer, salvar ou finalizar: ").lower()
 
