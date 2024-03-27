@@ -114,7 +114,7 @@ class ContaPoupanca(Conta):
     
 
 
-class Pessoa(ABC):
+class Pessoa:
 
     def __init__(self, nome: str, cpf: int, idade: int) -> None:
        
@@ -122,10 +122,7 @@ class Pessoa(ABC):
        self._cpf = cpf 
        self._idade = idade
 
-    
-    
-    
-    
+
     def __repr__(self) -> str:
         return f"{self.__dict__}"
     
