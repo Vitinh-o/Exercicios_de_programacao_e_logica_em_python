@@ -41,7 +41,7 @@ class Conta(ABC):
         return self._numero_agencia
 
 
-    @numero_agencia.getter
+    @numero_agencia.setter
     def numero_agencia(self, novo_numero_agencia: int) -> None:
 
         self._numero_agencia = novo_numero_agencia
@@ -53,7 +53,7 @@ class Conta(ABC):
         return self._numero_conta
 
 
-    @numero_conta.getter
+    @numero_conta.setter
     def numero_conta(self, novo_numero_conta: int) -> None:
 
         self._numero_conta = novo_numero_conta
@@ -93,7 +93,7 @@ class ContaCorrente(Conta):
         return self.__limite_extra_retirada
 
 
-    @limite_extra.getter
+    @limite_extra.setter
     def limite_extra(self, novo_limite_extra: int) -> None:
 
         self.limite_extra_retirada =  novo_limite_extra
@@ -122,12 +122,74 @@ class Pessoa:
        self._cpf = cpf 
        self._idade = idade
 
+    @property
+    def nome(self) -> int|float: 
+
+        return self._nome
+
+
+    @nome.setter
+    def nome(self, nome: str) -> None:
+
+        self._nome =  nome
+
+    @property
+    def cpf(self) -> int: 
+
+        return self._cpf
+
+    @property
+    def idade(self) -> int: 
+
+        return self._idade
+
+
+    @idade.setter
+    def limite_extra(self, idade: int) -> None:
+
+        self._idade = idade
+
 
     def __repr__(self) -> str:
         return f"{self.__dict__}"
     
 
 
-conta = ContaCorrente(1234, 5584, 2000, 250)
+class Cliente(Pessoa):
 
-print(conta)
+    def __init__(self, nome: str, cpf: int, idade: int, conta: Conta) -> None:
+        super().__init__(nome, cpf, idade)
+
+        self.__conta = conta 
+
+
+    @property
+    def conta(self) -> Conta: 
+
+        return self.__conta
+
+
+
+class Banco:
+    
+    def __init__(self, agencia, clientes: list) -> None:
+
+        self.__agencia = agencia
+        self.__clientes = clientes   
+
+    def verificar_cliente_existe(self, cpf: int, agencia: int, num_conta: int) -> bool|Cliente:
+
+        if agencia == self.__agencia:
+
+            for cliente in self.__clientes:
+
+                conta = cliente.conta    
+
+                if conta.numero_conta == num_conta:
+
+                    if cliente.cpf == cpf:
+
+                        return cliente  
+            
+        return False
+
